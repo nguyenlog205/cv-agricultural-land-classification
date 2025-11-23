@@ -21,7 +21,7 @@ dependencies:
   - pytorch-cuda=12.1
   
   # Data Science & Utility
-  - numpy
+  - numpy<2.0
   - pandas
   - scikit-learn
   - matplotlib
@@ -35,3 +35,4 @@ dependencies:
   # Cài đặt Pip
   - pip:
     - opencv-python
+    - skillsnetwork
