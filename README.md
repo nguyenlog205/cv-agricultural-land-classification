@@ -50,12 +50,18 @@ CV-AGRICULTURAL-LAND-CLASSIFICATION/
 ```
 
 ## 4. Workflow Description
-### 1. Create Conda environment
-Run the below script after navigating to the current project.
-```bash
-conda env create -f environment.yml
-```
-For example:
+
+### 4.1. If using Docker
+> Ensure you have both `environment.yml` and `Dockerfile` before running this script.
+
+#### 4.1.1. Build image
 ```powershell
-PS C:\Users\VICTUS\developer\cv-agricultural-land-classification> conda env create -f environment.yml
+docker build -t capstone-geospatial-ai-image .
 ```
+where:
+| **Parameter** | **Description**|
+|----------------|------------|
+|`docker build`  |Official command of Docker to read `Dockerfile` and build Image|
+|`-t capstone-geospatial-ai-image`| Set **tag** and name for current Image|
+|`.`| Indicate **Context Build** where contains `Dockerfile` (is the current directory)|
+
