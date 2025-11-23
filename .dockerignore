@@ -1,0 +1,14 @@
+# Loại bỏ các file và thư mục không cần thiết
+.git
+.gitignore
+.DS_Store
+__pycache__
+
+# Dữ liệu thô và kết quả/logs (Rất quan trọng!)
+data/raw
+results/
+logs/
+checkpoints/
+
+# Môi trường ảo (virtual environment)
+venv
