@@ -42,3 +42,7 @@ EARLY_STOPPING_PATIENCE: 5
 MODEL_SAVE_PATH: ./models/best_model.pth
 LOG_DIR: ./logs/
 
+batch_size: 32
+learning_rate: 0.001
+num_epochs: 50
+

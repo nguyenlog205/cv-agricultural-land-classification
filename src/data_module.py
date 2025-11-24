@@ -17,30 +17,35 @@ IMG_SIZE = 64
 train_transform = A.Compose([
     A.Resize(height=IMG_SIZE, width=IMG_SIZE),
     
-    # --- Geometric Transformations ---
-    A.HorizontalFlip(p=0.5),
-    A.VerticalFlip(p=0.5),
-    A.RandomRotate90(p=0.5),
+    # --- 1. Chuyển đổi Hình học (Geometric Transformations) ---
+    A.HorizontalFlip(p=0.5), # Lật ngang 
+    A.VerticalFlip(p=0.5),   # Lật dọc
+    A.RandomRotate90(p=0.5), # Xoay ngẫu nhiên 90 độ
     
-    # --- Color and Brightness Adjustments ---
+    # --- 2. Điều chỉnh Màu sắc & Độ sáng (Color/Brightness Adjustments) ---
     A.OneOf([
-        A.RandomBrightnessContrast(p=1),
-        A.HueSaturationValue(p=1),
-    ], p=0.3),
+        A.RandomBrightnessContrast(p=1), # Tăng/giảm độ sáng và độ tương phản
+        A.HueSaturationValue(p=1),       # Thay đổi màu sắc và độ bão hòa
+    ], p=0.3), 
     
-    # --- Noise Addition ---
+    # --- 3. Thêm nhiễu (Noise Addition) ---
     A.ISONoise(color_shift=(0.01, 0.05), intensity=(0.1, 0.5), p=0.2),
 
-    # --- Cutting Out ---
+    # --- 4. Cắt/Che lỗ (CoarseDropout - Dùng API cũ) ---
     A.CoarseDropout(
-        num_holes_range=(1, 2),
-        hole_height_range=(1, 20),
-        hole_width_range=(1, 20),     # Thay cho max_width
-        fill_value=0,
-        p=0.2
+        # Đã thay thế num_holes_range bằng max_holes
+        max_holes=2, 
+        # Đã thay thế hole_height_range bằng max_height
+        max_height=20, 
+        # Đã thay thế hole_width_range bằng max_width
+        max_width=20, 
+        fill_value=0, 
+        p=0.2 
     ),
-    A.Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225)),
-    ToTensorV2(),
+    
+    # --- 5. Bước cuối cùng (Normalization & ToTensor) ---
+    A.Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225)), 
+    ToTensorV2(), 
 ])
 
 # --- Val/Test ---
@@ -187,3 +192,23 @@ def create_dataloaders(
     test_loader  = DataLoader(test_dataset,  batch_size=batch_size, shuffle=False)
     
     return train_loader, val_loader, test_loader
+'''
+import torch
+print("PyTorch version:", torch.__version__)
+print("CUDA available:", torch.cuda.is_available())
+print("CUDA version:", torch.version.cuda)
+
+if torch.cuda.is_available():
+    print("GPU Name:", torch.cuda.get_device_name(0))
+else:
+    print("❌ Đang chạy bằng CPU! Kiểm tra lại Driver.")
+'''
+
+
+train_loader, val_loader, test_loader = create_dataloaders(
+    data_config=load_config("config/data_config.yml"), 
+    batch_size=32
+)
+
+print(f"🚀 DataLoaders created: Train batches={len(train_loader)}, Val batches={len(val_loader)}, Test batches={len(test_loader)}")
+
