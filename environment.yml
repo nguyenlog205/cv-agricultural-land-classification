@@ -1,38 +1,36 @@
 name: capstone-geospatial-ai
-
-# --- Define conda channels ---
 channels:
-  - conda-forge
   - pytorch
   - nvidia
+  - conda-forge
   - defaults
-
-# --- Define dependencies ---
 dependencies:
-  # Python core & Utilities
+  # --- Core python ---
   - python=3.10
   - pip
-  - jupyterlab=4.1.0
-  
-  # Machine Learning & Deep Learning (Khóa cho CUDA 12.1)
+  - jupyterlab
+  - ipykernel
+
+  # 3. PYTORCH & CUDA (Cho GPU)
   - pytorch=2.1.0
   - torchvision=0.16.0
   - torchaudio=2.1.0
   - pytorch-cuda=12.1
-  
-  # Data Science & Utility
-  - numpy<2.0
+
+  # --- GIS and data science ---
+  - gdal=3.7.2
+  - rasterio=1.3.9
   - pandas
   - scikit-learn
   - matplotlib
   - pillow
-  - pyyaml 
+  - pyyaml
+  - numpy=1.26.4
+  - seaborn
 
-  # GIS/Geospatial Specific
-  - rasterio=1.3.9
-  - gdal=3.7.2
-
-  # Cài đặt Pip
+  # --- Pip packages ---
   - pip:
-    - opencv-python
+    - opencv-python-headless==4.10.0.84
+    - albumentations==1.4.0 
     - skillsnetwork
+    - tqdm

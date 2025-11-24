@@ -1,0 +1,44 @@
+
+# =============================================================
+# DATA LOADING AND PREPROCESSING MODULE
+# =============================================================
+
+# --- Data augmentation ---
+HORIZONTAL_FLIP_PROB: 0.5
+VERTICAL_FLIP_PROB: 0.5
+RANDOM_ROTATE_LIMIT: 0.5
+
+
+ISONOISE_SHIFT_LIMIT_MIN: 0.01
+ISONOISE_SHIFT_LIMIT_MAX: 0.05
+INTENSITY_SCALE_LIMIT_MIN: 0.1
+INTENSITY_SCALE_LIMIT_MAX: 0.5
+NOISE_PROB: 0.2
+
+CUTTING_OFF_MIN_HOLES: 1
+CUTTING_OFF_MAX_HOLES: 4
+CUTIING_OFF_MAX_HEIGHT: 16
+CUTTING_OFF_MAX_WIDTH: 16
+CUTTING_OF_PROB: 0.2
+
+# --- Data normalization ---
+NORMALIZATION_MEAN: [0.485, 0.456, 0.406]
+NORMALIZATION_STD: [0.229, 0.224, 0.225]
+
+# --- DataLoader parameters ---
+NUM_WORKERS: 4
+SHUFFLE: True
+PIN_MEMORY: True
+DROP_LAST: False
+
+# =============================================================
+# Training hyperparameters
+# =============================================================
+LEARNING_RATE: 0.001
+NUM_EPOCHS: 25
+CHECKPOINT_DIR: ./checkpoints/
+SAVE_CHECKPOINT_EVERY_N_EPOCHS: 5
+EARLY_STOPPING_PATIENCE: 5
+MODEL_SAVE_PATH: ./models/best_model.pth
+LOG_DIR: ./logs/
+
